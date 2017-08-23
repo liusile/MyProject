@@ -1,0 +1,25 @@
+﻿.btn-group, .btn-group-vertical {
+    vertical-align:top!important
+}
+.form-group {
+    margin-right: 12px;
+    margin-bottom: 5px!important;
+}
+
+.form-group label {
+    width: 75px !important;
+    text-align: right;
+}
+.panel {
+    border: 0px !important;
+}
+body{
+     font-size:12px;
+     padding:0 1px;
+}
+.center{
+    text-align: center
+}
+.margin-right12{
+    margin-right:12px;
+}

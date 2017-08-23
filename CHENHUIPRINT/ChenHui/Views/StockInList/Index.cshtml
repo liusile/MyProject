@@ -1,0 +1,104 @@
+﻿<ol class="breadcrumb">
+    <li><span class="glyphicon glyphicon-send"></span> <a href="#">仓库系统</a></li>
+    <li class="active">入库明细</li>
+</ol>
+        
+
+<div id="toolbar">
+    <div class="form-inline" role="form">
+        <div class="form-group">
+            <label for="">订单日期：</label>
+            <input name="DateS" class="form-control " type="date">
+            - <input name="DateE" class="form-control " type="date">
+        </div>
+        <div class="form-group">
+            <label for="">供应商：</label>
+            <input name="Supplier" class="form-control " type="text">
+        </div>
+        <div class="form-group">
+            <label for="ProductType">入库单号：</label>
+            <input name="StockRecordNo" class="form-control " type="text">
+        </div>
+        <div class="form-group">
+            <label for="">仓管：</label>
+            <input name="StorageManager" class="form-control " type="text">
+        </div>
+
+        <div class="btn-group " role="group" aria-label="...">   
+            <button id="ok" type="submit" class="btn btn-primary" onclick="Search()"><span class="glyphicon glyphicon-search "></span> 查询</button>
+            <button id="ok" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> 新增</button>
+            <button id="ok" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> 导出</button>
+        </div>
+    </div>
+</div>
+
+<table id="table"></table>
+        @section scripts
+        {
+            <script language="javascript">
+                $('#table').bootstrapTable({
+                    url: "@Url.Action("ListData")",
+                    pagination: "true",
+                    sidePagination: 'server',
+                    toolbar: "#toolbar",
+                    sortName: "id",
+                    cache:"false",
+                    sortOrder: "asc",
+                    queryParams: function queryParams(params) {  
+                        $('#toolbar').find('input[name]').each(function () {
+                            params[$(this).attr('name')] = $(this).val();
+                        });
+                        return params;
+                    },
+                    columns: [{ checkbox: 'true' },
+                        { field: 'StockRecordNo', title: '入库单号', sortable: true },
+                        { field: 'ProductType', title: '类别', sortable: true },
+                        { field: 'ProductSubType', title: '类型', sortable: true },
+                        { field: 'Brand', title: '品牌', sortable: true },
+                        { field: 'Spec', title: '规格', sortable: true },
+                        { field: 'Grammage', title: '克数', sortable: true },
+                        { field: 'TonOfPrice', title: '吨价', sortable: true },
+                        { field: 'UnitPrice', title: '单价', sortable: true },
+                        { field: 'Num', title: '入库数量', sortable: true },
+                        { field: 'Num', title: '剩余量', sortable: true },
+                        { field: 'Supplier', title: '供应商', sortable: true },
+                        { field: 'StorageManager', title: '仓管', sortable: true },
+                        { field: 'CreateTime', title: '时间', sortable: true },
+                        { field: 'Oper',title: '操作',align:'center',events: 'operateEvents',formatter: 'operateFormatter'}]
+                });
+
+                function operateFormatter(value, row, index) {
+                    return [
+                        //'<span class="glyphicon glyphicon-trash padding-right12"></span>',
+                        '<span class="del glyphicon glyphicon-trash" title="删除"></span>'
+                    ].join('');
+                }
+                window.operateEvents = {
+                    'click .del': function (e, value, row, index) {
+                        $.ajax({
+                            url: "@Url.Action("Delete")",
+                            dataType: "json",
+                            cache: false,
+                            data: { StockRecordNo : row.StockRecordNo },
+                            type: "POST",
+                            success: function (data) {
+                                if (data.isSuccess) {
+                                    layer.msg(data.Msg);
+                                    $('#table').bootstrapTable('refresh');
+                                }
+                                else {
+                                    layer.msg(data.Msg);
+                                }
+                            },
+                            error: function (ex) {
+                                layer.msg(ex.responseText);
+                            }
+                        });            
+                    }
+                };
+                function Search() {
+                    $('#table').bootstrapTable('refresh');
+                };
+            </script>
+        }
+

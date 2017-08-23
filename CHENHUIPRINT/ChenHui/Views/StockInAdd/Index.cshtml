@@ -1,0 +1,177 @@
+﻿<ol class="breadcrumb">
+    <li><span class="glyphicon glyphicon-send"></span> <a href="#">仓库系统</a></li>
+    <li class="active">入库操作</li>
+</ol>
+
+<div class="panel panel-default ">@*单头*@
+    <div class="panel-heading"><span class="glyphicon glyphicon-hand-right"></span> 单头 </div>
+    <div class="panel-body">
+        <form id="orderHead">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="">入库单号：</label>
+                    <input name="StockRecordNo" class="form-control " readonly type="text" value="@ViewBag.flowNo">
+                </div>
+                <div class="form-group">
+                    <label for="">供应商：</label>
+                    <input name="Supplier" class="form-control " type="text">
+                </div>
+                <div class="form-group">
+                    <label for="ProductType">采购人：</label>
+                    <input name="Purchaser" class="form-control " type="text">
+                </div>
+                <div class="form-group padding-right12">
+                    <label for="">仓管：</label>
+                    <input name="StorageManager" class="form-control " type="text">
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="form-group" style="width: 100%">
+                    <label for="">备注：</label>
+                    <textarea name="Remark" class="form-control" rows="3" style="width: 75%"></textarea>
+                </div>
+            </div>
+        </form>
+</div>
+</div>
+
+<div class="panel panel-default ">@*单身*@
+    <div class="panel-heading"><span class="glyphicon glyphicon-hand-right "></span> 单身</div>
+    <div class="panel-body">
+        <div class="form-inline">
+            <form  id="orderBodyEdit">
+                <div class="form-group">
+                    <label for="">耗材类型：</label>
+                    <input name="ProductType" class="form-control " type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="">类型：</label>
+                    <input name="ProductSubType" class="form-control " type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="">品牌：</label>
+                    <input name="Brand" class="form-control " type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="">规格：</label>
+                    <input name="Spec" class="form-control " type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="">克数：</label>
+                    <input name="Grammage" class="form-control " type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="">吨价￥：</label>
+                    <input name="TonOfPrice" class="form-control " type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="">单价￥：</label>
+                    <input name="UnitPrice" class="form-control " type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="">入库数量：</label>
+                    <input name="Num" class="form-control " type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="">单位：</label>
+                    <input name="Unit" class="form-control " type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="">金额合计：</label>
+                    <input name="Amount" class="form-control " type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for=""></label>
+                    <button id="ok" type="button" class="btn btn-sm btn-primary" onclick="AddDetail();"><span class="glyphicon glyphicon-plus"></span> 确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <table id="orderBody">@*单身列表*@
+        <thead>
+            <tr>
+                <th data-field="rowId" data-visible="false"></th>
+                <th data-field="title" data-formatter="TitleFormatter">名称及规格</th>
+                <th data-field="ProductType">耗材类型</th>
+                <th data-field="ProductSubType">类型</th>
+                <th data-field="Brand">品牌</th>
+                <th data-field="Spec">规格</th>
+                <th data-field="Grammage">克数</th>
+                <th data-field="TonOfPrice">吨价</th>
+                <th data-field="UnitPrice">单价</th>
+                <th data-field="Num">入库数量</th>
+                <th data-field="Unit">单位</th>
+                <th data-field="Amount">金额合计</th>
+                <th data-field="oper" data-formatter="operateFormatter" data-events="operateEvents"  data-align='center'>操作</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<div class="center">
+    <button id="ok" type="button" class="btn btn-primary"  onclick="Save()"><span class="glyphicon glyphicon-ok "></span> 提交</button>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        var $table = $('#orderBody');
+        $(function () { 
+            $table.bootstrapTable({ data: [] });
+        });
+        //格式化 按钮
+        function operateFormatter(value, row, index) {
+            return [
+                '<span class="del glyphicon glyphicon-trash  margin-right12" title="删除"></span>',
+                '<span class="edit glyphicon glyphicon-pencil" title="修改"></span>'
+            ].join('');
+        }
+        //格式化 名称及规格
+        function TitleFormatter(value, row, index) {
+            return row.ProductSubType + row.Brand + row.Spec + row.Grammage;
+        }
+        //表格事件
+        window.operateEvents = {
+            'click .del': function (e, value, row, index) {
+                $table.bootstrapTable('remove', { field: 'rowId', values: [row.rowId] });
+            },
+            'click .edit': function (e, value, row, index) {
+                $.each($("#orderBodyEdit [name]"), function (index, obj) {
+                    var name = $(obj).prop("name");
+                    $(obj).val(row[name]);
+                });
+            }
+        };
+        //添加明细
+        function AddDetail() {
+            var data={rowId:Guid()};
+            $.each($("#orderBodyEdit").serializeArray(),
+                function(index, row) {
+                    data[row.name] = row.value;
+                });
+            $table.bootstrapTable('append', data);
+        }
+        //提交
+        function Save() {
+            var body = $table.bootstrapTable('getData');
+            var head = $("#orderHead").serializeObject();
+            head.Product = body;
+            $.ajax({
+                url: "@Url.Action("Save")",
+                dataType: "json",
+                cache: false,
+                data: { data : JSON.stringify(head) },
+                type: "POST",
+                success: function (data) {
+                if (data.isSuccess) {
+                    layer.msg(data.Msg);
+                   // window.location.reload();
+                }
+                else {
+                    layer.msg(data.Msg);
+                }
+            }
+        });
+        }
+       
+    </script>
+}
+

@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <link rel="stylesheet" href="~/Content/chenhui.css"/>
+    <title>晨辉ERP</title>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">晨辉ERP</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">下单系统<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">单张类</a></li>
+                        <li><a href="#">名片类</a></li>
+                        <li><a href="#">画册类</a></li>
+                        <li><a href="#">书籍类</a></li>
+                        <li><a href="#">信封类</a></li>
+                        <li><a href="#">封套类</a></li>
+                        <li><a href="#">联单类</a></li>
+                        <li><a href="#">手挽袋</a></li>
+                        <li><a href="#">手工开</a></li>
+                        <li><a href="#">非印开单</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">订单系统<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">网络订单</a></li>
+                        <li><a href="#">本地订单</a></li>
+                        <li><a href="#">询价订单</a></li>
+                        <li><a href="#">发外订单</a></li>
+                        <li><a href="#">客户管理</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">印前系统<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">CTP排单</a></li>
+                        <li><a href="#">出版记录</a></li>
+                        <li><a href="#">机台统计</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">生产系统<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">印刷排单</a></li>
+                        <li><a href="#">机台统计</a></li>
+                        <li><a href="#">历史记录</a></li>
+                        <li><a href="#">申请领料</a></li>
+                        <li><a href="#">领料记录</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">财务系统<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">订单查询</a></li>
+                        <li><a href="#">应收款项</a></li>
+                        <li><a href="#">应收明细</a></li>
+                        <li><a href="#">应付款项</a></li>
+                        <li><a href="#">应付明细</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">出纳系统<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">订单查询</a></li>
+                        <li><a href="#">应收款项</a></li>
+                        <li><a href="#">应收明细</a></li>
+                        <li><a href="#">发外查询</a></li>
+                        <li><a href="#">应付款项</a></li>
+                        <li><a href="#">应付明细</a></li>
+                        <li><a href="#">应付总账</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">仓库系统<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">申请采购</a></li>
+                        <li><a href="@Url.Action("Index", "StockInAdd")">入库管理</a></li>
+                        <li><a href="@Url.Action("Index", "StockInList")">入库明细</a></li>
+                        <li><a href="#">申请领料</a></li>
+                        <li><a href="#">出库管理</a></li>
+                        <li><a href="#">出库明细</a></li>
+                        <li><a href="#">库存统计</a></li>
+                        <li><a href="#">成品入库</a></li>
+                        <li><a href="#">入库明细</a></li>
+                        <li><a href="#">成品出库</a></li>
+                        <li><a href="#">出库明细</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">采购系统<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">申请采购</a></li>
+                        <li><a href="#">采购管理</a></li>
+                        <li><a href="#">申请入库</a></li>
+                        <li><a href="#">采购明细</a></li>
+                        <li><a href="#">采购统计</a></li>
+                        <li><a href="#">供应商管理</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">人事系统<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">信息录入</a></li>
+                        <li><a href="#">员工管理</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">送货系统<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">待完善</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">基础设置<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">权限分配</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> 张小三</a></li>
+                <li><a href="#">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid" >@*style="margin: 0 5px"*@
+    @RenderBody()
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/Scripts/layer.js")
+   
+@Scripts.Render("~/bundles/bootstrap")
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+<!-- Latest compiled and minified Locales -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+@Scripts.Render("~/Scripts/chenhui.js")
+
+@RenderSection("scripts", required: false)
+</body>
+</html>

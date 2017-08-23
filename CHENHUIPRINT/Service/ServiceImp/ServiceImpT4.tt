@@ -1,0 +1,38 @@
+﻿<#@ template language="C#" hostspecific="True"#>  
+<#@ template language="C#" hostspecific="True"#>  
+<#@include file="Manager.ttinclude"#>  
+<#@ assembly name="$(SolutionDir)\Service\bin\Debug\Domain.dll" #>
+
+<# var manager = Manager.Create(Host, GenerationEnvironment); #>
+<#
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.Load("Domain");
+            Type[] ts = assembly.GetTypes();  
+            foreach (Type t in ts)  
+            {   
+                if(t.IsClass && t.Namespace=="Domain.Model"){
+                    var name= t.Name;
+                    manager.StartNewFile(name+"AutoManage.cs");
+            #>
+   public partial class <#=name#>Manage : RepositoryBase<<#=name#>>
+   {    
+   }
+<#
+   }
+}           
+#> 
+
+<# manager.EndBlock(); #> 
+<# manager.StartHeader(); #>  
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Domain.Model;
+
+namespace Service.ServiceImp
+{ 
+<# manager.EndBlock(); #> 
+<# manager.StartFooter(); #>
+}
+<# manager.EndBlock(); #>  
+<# manager.Process(true); #>  
